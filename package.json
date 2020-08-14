@@ -1,0 +1,16 @@
+{
+  "name": "bot-test",
+  "version": "1.0.0",
+  "description": "bot made for testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yasser",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "got": "^11.5.2",
+    "request": "^2.88.2"
+  }
+}
