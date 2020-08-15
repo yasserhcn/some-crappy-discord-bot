@@ -1,5 +1,5 @@
 const request = require('request');
-
+const discord = require('discord.js');
 function wikiSearch(msg, keyword)
 {
     console.log(keyword);
@@ -12,13 +12,18 @@ function wikiSearch(msg, keyword)
     
     request(url, function (error, response, body) {
         console.error('error:', error); // Print the error if one occurred
-        console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-        //console.log('body:', body); // Print the HTML for the Google homepage.
         parsedPage = JSON.parse(body);
         names = parsedPage[1];
         links = parsedPage[3];
-        console.log(names);
-        console.log(links);
+        
+        let message = "found these results in wikipedia:\n\n";
+
+        for (let i = 0; i < names.length; i++) {
+          message += names[i] + " <" + links[i] + ">";
+          message += "\n";
+        }
+        
+        msg.channel.send(message);
       });
 }
 
