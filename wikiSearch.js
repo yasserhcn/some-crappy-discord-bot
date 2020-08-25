@@ -2,7 +2,17 @@ const request = require('request');
 const discord = require('discord.js');
 function wikiSearch(msg, keyword)
 {
-    console.log(keyword);
+    let searchIndex = 69;
+
+    for (let index = 0; index < keyword.length; index++) {
+      if ( keyword.charAt(index) <= '9' && keyword.charAt(index) >= '0' )
+      {
+        console.log("number detected at ", keyword.charAt(index))
+        searchIndex = index;
+      }
+      
+    }
+
     url = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${keyword}&format=json`;
     console.log("calling a request to " + url);
 
@@ -22,9 +32,16 @@ function wikiSearch(msg, keyword)
           message += names[i] + " <" + links[i] + ">";
           message += "\n";
         }
+
+        parseWiki(links[searchIndex], names[searchIndex]);
         
         msg.channel.send(message);
       });
+}
+
+function parseWiki(url, name)
+{
+  console.log(name)
 }
 
 module.exports.wikiSearch = wikiSearch;

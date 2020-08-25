@@ -38,6 +38,9 @@ function commands(msg, cmdTxt)
 {
   switch(cmdTxt.substr(0, 4))
   {
+    case "ping":
+      msg.channel.send("*pong*");
+      break;
     case "help":
       help(msg);
       break;
@@ -55,8 +58,9 @@ function help(msg)
         .setTitle(" Help ")
         .setDescription("these are the available commands")
         .addFields(
-          { name: "games", value: "i'm still working on it\n suggest me some games", inline: true },
-          { name: "commands", value: "ping is the only thing that exists ***for now***", inline: true }
+          { name : "Prefix", value : "*****", inline : false},
+          { name: "Games", value: "i'm still working on it\n suggest me some games", inline: true },
+          { name: "Commands", value: " wiki\n ping\n ", inline: true }
         )
         .setTimestamp()
         .setFooter("the message is finished, nothing to read here")
