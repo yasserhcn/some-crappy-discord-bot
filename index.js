@@ -6,7 +6,7 @@ const fightGame = require('./game/fightGame');
 
 let PREFIX = "*";
 
-let fightGames;
+let fightGames = [];
 
 
 client.on('ready', () => {
@@ -55,10 +55,27 @@ function commands(msg, cmdTxt)
 
   if (cmdTxt.substr(0,5).toLowerCase() == "fight") {
 
+    console.log(cmdTxt.substr(6,11));
+    if (cmdTxt.substr(6,11) == "strt") {
+      console.log("creating a new class instance for an existing user")
 
-    fightGames += new fightGame.player(msg.author.id);
+      //iterate through the existing games to check if it already exists
+      let exists = false;
+      for (let i = 0; i < fightGames.length; i++) {
+        console.log(fightGames[i]);
+        console.log(i)
+        if (fightGames[i]) {
+          exists = true;
+        }
+      }
 
-    console.log(fightGames[0]);
+      if (exists) {
+        msg.channel.send("game already exists"); 
+      }else{
+        fightGames.push(new fightGame.player(msg.author.id));
+      }
+
+    }
   }
 }
 
