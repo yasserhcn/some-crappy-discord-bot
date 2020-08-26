@@ -7,10 +7,6 @@ class player
         console.log(`created a class instance for the user ${id}`)
     }
 
-    get health()
-    {
-        return health;
-    }
 }
 
 module.exports.player = player;

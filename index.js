@@ -54,9 +54,11 @@ function commands(msg, cmdTxt)
   }
 
   if (cmdTxt.substr(0,5).toLowerCase() == "fight") {
-    fightGames += new fightGame.player(msg.user);
 
-    console.log(fightGames);
+
+    fightGames += new fightGame.player(msg.author.id);
+
+    console.log(fightGames[0]);
   }
 }
 
