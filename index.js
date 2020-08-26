@@ -2,8 +2,11 @@ const Discord = require('discord.js');
 const auth = require('./auth.json')
 const client = new Discord.Client();
 const search = require('./wikiSearch');
+const fightGame = require('./game/fightGame');
 
-let PREFIX = "*"
+let PREFIX = "*";
+
+let fightGames;
 
 
 client.on('ready', () => {
@@ -48,6 +51,12 @@ function commands(msg, cmdTxt)
       var text = cmdTxt.substr(5);
       wikiSearch(msg, text);
       break;
+  }
+
+  if (cmdTxt.substr(0,5).toLowerCase() == "fight") {
+    fightGames += new fightGame.player(msg.user);
+
+    console.log(fightGames);
   }
 }
 
