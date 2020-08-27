@@ -7,6 +7,17 @@ class player
         console.log(`created a class instance for the user ${id}`)
     }
 
+    changeHealth(amount = 0){
+        this.health += amount;
+    }
+
+    checkHealth(){
+        if(this.health > 0){
+            return true;
+        }else if (this.health <= 0) {
+            return false;
+        }
+    }
 }
 
 module.exports.player = player;

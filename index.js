@@ -15,7 +15,7 @@ client.on('ready', () => {
 
   /* set bot status */
   client.user.setActivity("the better and improved bot", {
-  type: "CRYING",
+  type: "STREAMING",
   url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
   });
 
@@ -74,16 +74,13 @@ function commands(msg, cmdTxt)
       }else{
         fightGames.push(new fightGame.player(msg.author.id));
       }
-
     }
   }
 }
 
 function help(msg)
 {
-  
-  console.log(msg.content.substr(6, 9))
-  if(msg.content.substr(6, 9) == "fight")
+  if(msg.content.substr(6, 8) == "fight")
   {
     let embed = new Discord.MessageEmbed()
                     .setColor('#ff0000')
@@ -111,8 +108,6 @@ function help(msg)
 
     msg.channel.send(messageEmbed)
   }
-
-
 }
 
 function wikiSearch(msg, text)
