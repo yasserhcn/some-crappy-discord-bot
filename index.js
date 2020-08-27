@@ -81,7 +81,23 @@ function commands(msg, cmdTxt)
 
 function help(msg)
 {
-  let messageEmbed = new Discord.MessageEmbed()
+  
+  console.log(msg.content.substr(6, 9))
+  if(msg.content.substr(6, 9) == "fight")
+  {
+    let embed = new Discord.MessageEmbed()
+                    .setColor('#ff0000')
+                    .setTitle('fight game help')
+                    .addFields(
+                      { name : "start", value : "strt : start a game", inline : false},
+                      { name : "in-game", value : "still working on it, be patient", inline : true}
+                    )
+    
+    msg.channel.send(embed);
+  }
+  else
+  {
+    let messageEmbed = new Discord.MessageEmbed()
         .setColor('#00ff00')
         .setTitle(" Help ")
         .setDescription("these are the available commands")
@@ -93,7 +109,10 @@ function help(msg)
         .setTimestamp()
         .setFooter("the message is finished, nothing to read here")
 
-  msg.channel.send(messageEmbed)
+    msg.channel.send(messageEmbed)
+  }
+
+
 }
 
 function wikiSearch(msg, text)
