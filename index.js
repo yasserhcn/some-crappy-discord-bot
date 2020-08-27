@@ -64,7 +64,7 @@ function commands(msg, cmdTxt)
       for (let i = 0; i < fightGames.length; i++) {
         console.log(fightGames[i]);
         console.log(i)
-        if (fightGames[i]) {
+        if (fightGames[i].id == msg.author.id) {
           exists = true;
         }
       }
@@ -87,7 +87,7 @@ function help(msg)
         .setDescription("these are the available commands")
         .addFields(
           { name : "Prefix", value : "*****", inline : false},
-          { name: "Games", value: "i'm still working on it\n suggest me some games", inline: true },
+          { name: "Games", value: "fight", inline: true },
           { name: "Commands", value: " wiki\n ping\n ", inline: true }
         )
         .setTimestamp()
