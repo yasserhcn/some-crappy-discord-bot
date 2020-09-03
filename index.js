@@ -56,34 +56,41 @@ function commands(msg, cmdTxt)
   if (cmdTxt.substr(0,5).toLowerCase() == "fight") {
 
     console.log(cmdTxt.substr(6,11));
-    if (cmdTxt.substr(6,11) == "strt") {
-      console.log("creating a new class instance for an existing user")
 
-      //iterate through the existing games to check if it already exists
-      let exists = false;
-      for (let i = 0; i < fightGames.length; i++) {
-        console.log(fightGames[i]);
-        console.log(i)
-        if (fightGames[i].id == msg.author.id) {
-          exists = true;
-        }
-      }
+    switch(cmdTxt.substr(6,11))
+    {
+      /*  command for starting a game  */
+      case "strt":
+            console.log("creating a new class instance for an existing user")
 
-      if (exists) {
-        msg.channel.send("game already exists"); 
-      }else{
-        fightGames.push(new fightGame.player(msg.author.id));
-        msg.channel.send("started a game")
-      }
-    }else if (cmdTxt.substr(6,10) == "hit") {
-      for (let i = 0; i < fightGames.length; i++) {
-        if (fightGames[i].id == msg.author.id) {
-          let damageAmount = Math.random() * 10;
-          fightGames[i].changeHealth( -damageAmount );
-          msg.channel.send(`did ${damageAmount} damage`)
-          console.log(fightGames[i].health);
+          //iterate through the existing games to check if it already exists
+          let exists = false;
+          for (let i = 0; i < fightGames.length; i++) {
+            console.log(fightGames[i]);
+            console.log(i)
+            if (fightGames[i].id == msg.author.id) {
+              exists = true;
+            }
+          }
+
+          if (exists) {
+            msg.channel.send("game already exists"); 
+          }else{
+            fightGames.push(new fightGame.player(msg.author.id));
+            msg.channel.send("started a game")
+          }
+          break;
+      /*  command for hitting a user  */
+      case "hit":
+        for (let i = 0; i < fightGames.length; i++) {
+          if (fightGames[i].id == msg.author.id) {
+            let damageAmount = Math.random() * 10;
+            fightGames[i].changeHealth( -damageAmount );
+            msg.channel.send(`did ${damageAmount} damage`)
+            console.log(fightGames[i].health);
+          }
         }
-      }
+        break;
     }
   }
 }
