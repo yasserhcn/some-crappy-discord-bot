@@ -18,6 +18,10 @@ class player
             return false;
         }
     }
+
+    damage(damageAmount = 0){
+        this.health = this.health - damageAmount
+    }
 }
 
 module.exports.player = player;

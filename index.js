@@ -73,6 +73,16 @@ function commands(msg, cmdTxt)
         msg.channel.send("game already exists"); 
       }else{
         fightGames.push(new fightGame.player(msg.author.id));
+        msg.channel.send("started a game")
+      }
+    }else if (cmdTxt.substr(6,10) == "hit") {
+      for (let i = 0; i < fightGames.length; i++) {
+        if (fightGames[i].id == msg.author.id) {
+          let damageAmount = Math.random() * 10;
+          fightGames[i].changeHealth( -damageAmount );
+          msg.channel.send(`did ${damageAmount} damage`)
+          console.log(fightGames[i].health);
+        }
       }
     }
   }
