@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const auth = require('./auth.json')
 const client = new Discord.Client();
-const search = require('./wikiSearch');
+const search = require('./wikipedia/wikiSearch');
 const fightGame = require('./game/fightGame');
 
 let PREFIX = "*";
@@ -70,6 +70,7 @@ function commands(msg, cmdTxt)
             console.log(i)
             if (fightGames[i].id == msg.author.id) {
               exists = true;
+            
             }
           }
 
@@ -91,6 +92,14 @@ function commands(msg, cmdTxt)
           }
         }
         break;
+      case "hlth":
+            for (let i = 0; i < fightGames.length; i++) {
+                if (fightGames[i].id == msg.author.id) {
+                    let currentHealth = fightGames[i].findHealth();
+                    msg.channel.send(`your health is : ${currentHealth}`);
+                }
+            }
+          break;
     }
   }
 }

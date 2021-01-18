@@ -19,6 +19,10 @@ class player
         }
     }
 
+    findHealth(){
+        return this.health;
+    }
+
     damage(damageAmount = 0){
         this.health = this.health - damageAmount
     }
