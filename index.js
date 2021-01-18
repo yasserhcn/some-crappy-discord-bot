@@ -83,13 +83,24 @@ function commands(msg, cmdTxt)
           break;
       /*  command for hitting a user  */
       case "hit":
-        for (let i = 0; i < fightGames.length; i++) {
-          if (fightGames[i].id == msg.author.id) {
-            let damageAmount = Math.random() * 10;
-            fightGames[i].changeHealth( -damageAmount );
-            msg.channel.send(`did ${damageAmount} damage`)
-            console.log(fightGames[i].health);
-          }
+          if(fightGames.length == 1){
+            msg.channel.send("no players to hit");
+        }else{
+            for (let i = 0; i < fightGames.length; i++) {
+                if (fightGames[i].id != msg.author.id) {
+                    if(!fightGames[i].checkHealth())
+                    {
+                        msg.channel.send("you have sent a player to gulag, he gone now");
+                        fightGames.splice(i, 1);
+                    }else
+                    {
+                        console.log(fightGames[i].health);
+                        let damageAmount = Math.random() * 10;
+                        fightGames[i].changeHealth( -damageAmount - 50 );
+                        msg.channel.send(`did ${damageAmount} damage`)
+                    }
+                }
+            }
         }
         break;
       case "hlth":
@@ -113,6 +124,7 @@ function help(msg)
                     .setTitle('fight game help')
                     .addFields(
                       { name : "start", value : "strt : start a game", inline : false},
+                      { name: "fighting", value : "hit : hits a player ~~with a super precise amount~~\nhealth : checks for the health"},
                       { name : "in-game", value : "still working on it, be patient", inline : true}
                     )
     
