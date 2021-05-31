@@ -1,7 +1,9 @@
 const request = require('request');
 const discord = require('discord.js');
+const { htmlParse, default: parse } = require("node-html-parser");
+const { htmlToText } = require('html-to-text');
 
-function wikiSearch(msg, keyword, index)
+function wikiSearch(msg, keyword, searchIndex1)
 {
     let searchIndex = 69;
 
@@ -38,17 +40,35 @@ function wikiSearch(msg, keyword, index)
           }
         }
         
-        if(index){
-          parseWiki(links[searchIndex], names[searchIndex]);
+        if(searchIndex1){
+          let text = parseWiki(links[searchIndex1], msg)
+          msg.channel.send(text);
+        }else{
+          msg.channel.send(message);
         }
-        
-        msg.channel.send(message);
       });
 }
 
-function parseWiki(url, name)
+function parseWiki(url, msg)
 {
-  console.log(name)
+  request(url, (err, res, body)=>{
+
+    if(err){ console.error(err) }
+
+    const root = parse(body);
+    
+    let paragraph = root.querySelectorAll(".mw-parser-output p")[1].toString().substr(0, 2500)
+
+    paragraph = htmlToText(paragraph);
+
+    paragraph = paragraph.replace(/\[.*?\]/g, '')
+    
+
+    msg.channel.send(paragraph.toString().substr(0, 1000))
+
+    return paragraph.toString()
+
+  })
 }
 
 module.exports.wikiSearch = wikiSearch;

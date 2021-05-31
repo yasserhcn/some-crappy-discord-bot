@@ -150,7 +150,10 @@ function help(msg)
 
 function wikiSearch(msg, text)
 {
-  search.wikiSearch(msg, text);
+  let spaces = text.indexOf(' ');
+  let pageNum = parseInt(text.substr(spaces+1));
+  console.log(pageNum);
+  search.wikiSearch(msg, text, pageNum);
 }
 
 client.login(auth.token);
